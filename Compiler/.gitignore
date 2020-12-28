@@ -1,0 +1,6 @@
+lex.yy.c
+*.in
+*.out
+*.o
+*.log
+*.swp
