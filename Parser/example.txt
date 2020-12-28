@@ -1,0 +1,75 @@
+/*  
+    will work as comments section
+    !!  Functions will be optional (Until knowing it is 
+        possible to implement in MIPS assembly this 
+        will be an idea only)
+    
+    The syntax to create a function is the following:
+    function function_name ( reg parameter , ... ) {
+        
+    }
+*/
+
+reg min ( reg a, reg b ) {
+    if ( a < b ) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+main {
+    reg register1 = 3;
+    reg register2 = 7;
+    reg register3 = register1 + register2;
+    /*  Hexadecimal constants should be of length
+        between 1 and 4
+     */
+    reg register4 = 0x00F2;
+
+    if ( register1 < register2 ) {
+        register2 = register2 - 2;
+    } else {
+        register2 = register2 + 3;
+    }
+    
+    reg register5 = min( register1, register2 );
+    
+    while ( register2 > 0 ) {
+        register2 = register2 - 1;
+    }
+
+    register1 = register1 & register2;
+    register1 = register1 | register2;
+    register1 = register1 ^ register2;
+    register1 = ~ register2;
+    register1 = register1 >> 2;
+    register1 = register1 << 2;
+    register1 = register1 * register2;
+    register1 = register1 | register2;
+    register1 = register1 + register2;
+    register1 = register1 - register2;
+    register1 = register1 / register2;
+    if ( register1 <= register2 ) {
+        register1 = ~register1;
+    }
+    if ( register1 >= register2 ) {
+        register1 = ~register1;
+    }
+    if ( register1 < register2 ) {
+        register1 = ~register1;
+    }
+    if ( register1 > register2 ) {
+        register1 = ~register1;
+    }
+    if ( register1 <= register2 ) {
+        register1 = ~register1;
+    }
+    if ( register1 != 3 ) {
+        register1 = register1 + 1;
+    }
+    
+    mem[50] = 20;
+    mem[ registro3 + 3 ] = 0xAF;
+    
+}

@@ -1,0 +1,48 @@
+translation_unit : 	function_definition
+	|		translation_unit function_definition
+	|		main
+	;
+
+
+function_definition : 	function_type ID 
+
+function_type : 	VOID
+	|		DATA_TYPE
+	;	
+
+main : 			MAIN_BLOCK code_block
+	;
+
+code_block : 		'{' program '}'
+	;
+
+program : 		line ';'
+	;
+
+line : 			declaration
+	|		statement
+	|		assignment_expression
+	;
+
+declaration : 		DATA_TYPE ID
+	|		DATA_TYPE ID '=' simple_expression
+	;
+
+
+assignment_expression : ID 
+
+primary_expression : 	ID
+	|		CONSTANT
+	;
+
+simple_expression : 	primary_expression OPERATOR primary_expression
+	|		primary_expression
+	;
+
+expression : 		expression '(' expression ')'
+	|		simple_expression
+	;
+
+boolean_expression :	
+
+selection_statement :	IF '(' boolean_expression ')' code_block
