@@ -9,25 +9,37 @@ digits                  [0-9]
 spaces                  [ \t]
 hex_digits              [0-9A-Fa-f]
 sign                    [+-]
-ari_operators           [+-/*]
-bit_operators           [&~^|]
-delimiters               [()\[\]{}]
-separators               [,]
 %%
-"main"                          { printf("<main_block>"); }
-"/*"                            { comment(); }
-"reg"                           { printf("<data_type>"); }
-"if"|"else"|"while"|"return"    { printf("<control>"); }
-"mem"                           { printf("<memory_access>"); }
-{delimiters}                    { printf("<delimiter>"); }
-";"                             { printf("<eoi>"); /*End of instruction*/ }
-{separators}                    { printf("<separator>"); }
-{bit_operators}|"<<"|">>"       { printf("<bitwise_operation>"); }
-{ari_operators}                 { printf("<aritmetical_operation>"); }
-"<="|">="|"<"|">"|"=="|"!="     { printf("<comparison>"); }
-"="                             {printf("<assign>");}
-({sign}?{digits}*)|(0x{hex_digits}{1,4})  { printf("<constant>"); }
-{letters}({letters}|{digits}|"_")* { printf("<id>"); }
+"main"                           return MAIN; 
+"/*"                             comment(); 
+"reg"                            return DATA_TYPE; 
+"if"                             return IF; 
+"else"                           return ELSE; 
+"while"                          return WHILE; 
+"return"                         return RETURN; 
+"mem"                            return MEM; 
+({sign}?{digits}*)               return CONST; 
+(0x{hex_digits}*)                return CONST; 
+"{"                              return '{'; 
+"}"                              return '}'; 
+";"                              return ';'; 
+","                              return ','; 
+"<<"                             return SH_LEFT; 
+">>"                             return SH_RIGHT; 
+"=="                             return EQ_OP; 
+"!="                             return NEQ_OP; 
+"<="                             return LEQ_OP; 
+">="                             return GEQ_OP; 
+"<"                              return '<'; 
+">"                              return '>'; 
+"+"                              return '+'; 
+"-"                              return '-'; 
+"|"                              return '|'; 
+"^"                              return '^'; 
+"&"                              return '&'; 
+"~"                              return '~'; 
+"="                              return '='; 
+{letters}({letters}|{digits}|"_")*  return ID; 
 %%
 /* User Code Section */
 static void comment(void) {

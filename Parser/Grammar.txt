@@ -1,14 +1,8 @@
-translation_unit : 	function_definition
-	|		translation_unit function_definition
+translation_unit : 	function_definition translation_unit
 	|		main
 	;
 
-
-function_definition : 	function_type ID 
-
-function_type : 	VOID
-	|		DATA_TYPE
-	;	
+function_definition : 	FUNCTION ID code_block
 
 main : 			MAIN_BLOCK code_block
 	;
@@ -17,32 +11,62 @@ code_block : 		'{' program '}'
 	;
 
 program : 		line ';'
+	|		control_statement
 	;
 
 line : 			declaration
-	|		statement
 	|		assignment_expression
+	|		function_call
+	|		RETURN
+	;
+
+function_call : 	ID '(' ')'
 	;
 
 declaration : 		DATA_TYPE ID
 	|		DATA_TYPE ID '=' simple_expression
+	|		DATA_TYPE ID '=' memory_access
 	;
 
+assignment_expression : ID '=' simple_expression
+	|		ID '=' CONST
+	|		memory_access '=' ID
+	;
 
-assignment_expression : ID 
+memory_access : 	MEM '[' CONST ']'
+	|		MEM '[' ID '+' CONST ']'
 
 primary_expression : 	ID
-	|		CONSTANT
+	|		CONST
 	;
 
 simple_expression : 	primary_expression OPERATOR primary_expression
-	|		primary_expression
+	|		bit_expression
+	|		'~' bit_expression
 	;
 
-expression : 		expression '(' expression ')'
-	|		simple_expression
+bit_expression : 	primary_expression BIT_OPERATOR primary_expression
+	|		'~' ID
 	;
 
-boolean_expression :	
+control_statement : 	selection_statement
+	|		iteration_statement
+	;
 
 selection_statement :	IF '(' boolean_expression ')' code_block
+	|		IF '(' boolean_expression ')' code_block ELSE code_block
+	;
+
+iteration_statement : 	WHILE '(' boolean_expression ')' code_block
+	;
+
+boolean_expression : 	ID BOOLEAN_OPERATOR ID
+	;
+
+
+
+
+
+
+
+

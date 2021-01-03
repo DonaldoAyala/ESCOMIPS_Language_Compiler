@@ -1,0 +1,30 @@
+
+function assign_3 () {
+    R1 = mem[25];
+    R3 = 3;
+    if ( R1 == R3 ) {
+        return;
+    } else {
+        R1 = 3;
+    }
+    while ( r1 < r2 ) {
+        r1 = r1 + 1;
+    }
+}
+
+main { 
+    r1 = 3;
+    r5 = 4;
+    
+    assign_3 ();
+    
+    r2 = mem[25]; 
+    
+    if ( r1 < r5 ) {
+        r1 = -4;
+    } else {
+        r1 = 5;
+    }
+    
+    r6 = 0x3245;
+}
